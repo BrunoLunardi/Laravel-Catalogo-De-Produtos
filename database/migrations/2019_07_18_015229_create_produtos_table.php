@@ -11,10 +11,16 @@ class CreateProdutosTable extends Migration
      *
      * @return void
      */
+    //cria a tabela produtos no mysql
     public function up()
     {
         Schema::create('produtos', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            //$table->bigIncrements('id');
+            $table->increments('id');
+            $table->string('referencia');
+            $table->string('titulo');
+            $table->longText('descricao');
+            $table->float('preco', 8, 2);
             $table->timestamps();
         });
     }
