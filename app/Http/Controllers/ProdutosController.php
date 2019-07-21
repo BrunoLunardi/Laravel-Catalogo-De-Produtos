@@ -27,9 +27,14 @@ class ProdutosController extends Controller
     public function show($id){
         //retorna um produto cadastrado no bd, pela id fornecida url
         $produto = Produto::find($id);
+
+        //envia o produto localizado pela id para a view resources/views/produto/show.blade.php
+        return view('produto.show', array('produto' => $produto));
+/*
         echo "<pre>";
         print_r($produto);
         echo "</pre>";
+*/        
     }
 
 }
