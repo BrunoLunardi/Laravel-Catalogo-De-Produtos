@@ -6,6 +6,19 @@
 @section('content')
 
     <h1>Criar um novo produto</h1>
+
+    <!-- Verifica se houve erros de dados no forulário -->
+    <!-- Verificação realizada no ProdutosController->store()->validate -->
+    @if(count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <!-- Este Formulario enviará os dados para o controller ProdutosContoller e para o método store deste controller -->
     <!-- Esta linha é o mesmo que form method = POST -->
     {{Form::open(['action' => 'ProdutosController@store'])}}

@@ -46,6 +46,17 @@ class ProdutosController extends Controller
     //método para salvar o produto cadastrado no banco de dados (enviado do resourcers/views/produto/create.blade.php)
     //Request é necessário para acessar dados do formulário
     public function store(Request $request){
+
+        //validação de formulário utilizando o trait
+            //required -> dado obrigatório
+            //unique:produtos -> referencia não pode repetir na tabela produtos
+            //min3 -> tamanho mínimo do texto (caracteres)
+            //se não for valido os dados, será apresentado erro em resources/views/produtos/create.blade.php
+        $this->validate($request, [
+            'referencia' => 'required|unique:produtos|min:3',
+            'titulo' => 'required|min:3',
+        ]);
+
         $produto = new Produto();
 
         //pega cada informação do formulario para colocar no objeto produto (da model Produto)
