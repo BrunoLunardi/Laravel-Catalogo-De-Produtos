@@ -43,4 +43,24 @@ class ProdutosController extends Controller
         return view('produto.create');
     }
 
+    //método para salvar o produto cadastrado no banco de dados (enviado do resourcers/views/produto/create.blade.php)
+    //Request é necessário para acessar dados do formulário
+    public function store(Request $request){
+        $produto = new Produto();
+
+        //pega cada informação do formulario para colocar no objeto produto (da model Produto)
+        $produto->referencia = $request->input('referencia');
+        $produto->titulo = $request->input('titulo');
+        $produto->descricao = $request->input('descricao');
+        $produto->preco = $request->input('preco');
+
+        //se deu certo a gravação dos dados no BD
+        //método save() é herdado da model Produto
+        if($produto->save()){
+            //retorna para o index de resources/views/produto/index.blade.php
+            return redirect('produtos');
+        }
+
+    }
+
 }

@@ -7,7 +7,8 @@
 
     <h1>Criar um novo produto</h1>
     <!-- Este Formulario enviará os dados para o controller ProdutosContoller e para o método store deste controller -->
-    {{Form::open(['action' => 'ProdutosContoller@store'])}}
+    <!-- Esta linha é o mesmo que form method = POST -->
+    {{Form::open(['action' => 'ProdutosController@store'])}}
 
     {{Form::label('referencia', 'Referência')}}
     {{Form::text('referencia', '', ['class' => 'form-control', 'required',
