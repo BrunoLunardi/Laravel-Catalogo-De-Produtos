@@ -9,6 +9,8 @@
 
     <!-- Verifica se houve erros de dados no forulário -->
     <!-- Verificação realizada no ProdutosController->store()->validate -->
+    <!-- Pode trocar o nome do campo exibido em resources/lang/pt-br/validation.php atributes[] -->
+    <!-- É possível adicionar mensagens de erro customizada em resources/lang/pt-br/validation.php custom[] -->
     @if(count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
