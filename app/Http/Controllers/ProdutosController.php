@@ -37,4 +37,10 @@ class ProdutosController extends Controller
 */        
     }
 
+    //método para chamar o fomulário de criação de um novo produto
+    public function create(){
+        //Carrega view de resources/views/produto/create.blade.php
+        return view('produto.create');
+    }
+
 }
