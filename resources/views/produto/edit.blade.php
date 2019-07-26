@@ -27,11 +27,13 @@
             {{Session::get('mensagem')}}
         </div>
     @endif
-    
+
     <!-- Esta linha é o mesmo que form method = PUT, pois é edição de dados -->
     <!-- O Form::open aponta para uma rota, e não para um método dde ProdutosController -->
     <!-- Update requer um identificador no parâmetro (id) -->
-    {{Form::open(['route'=>['produtos.update', $produto->id], 'method'=>'PUT'])}}
+    <!-- multipart/form-data indica que além de dados do produto, o formulário enviará arquivos (foto) -->
+    {{Form::open(['route'=>['produtos.update', $produto->id],
+        'enctype'=>'multipart/form-data', 'method'=>'PUT'])}}
 
     {{Form::label('referencia', 'Referência', ['class'=>'prettyLabels'])}}
     {{Form::text('referencia', $produto->referencia, ['class' => 'form-control', 
@@ -49,9 +51,12 @@
     {{Form::text('preco', $produto->preco, ['class' => 'form-control', 
         'required', 'placeholder' => 'Preço'])}}   
 
+    <!-- Adicionar foto do produto -->
+    {{Form::label('fotoproduto', 'Foto')}}
+    {{Form::file('fotoproduto', ['class'=>'form-control', 'id'=>'fotoproduto'])}}
+
     <br/>
     {{Form::submit('Alterar!', ['class' => 'btn btn-default'])}}
-
     {{Form::close()}}
 
 @endsection

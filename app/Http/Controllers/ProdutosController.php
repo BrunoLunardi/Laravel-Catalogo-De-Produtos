@@ -90,8 +90,8 @@ class ProdutosController extends Controller
         return view('produto.edit', array('produto' => $produto));
     }
 
-    //função será acessada pela rota produtos.update
     //dados fornecidos via PUT do formulário (resources/views/produto/edit.blade.php)
+    //função será acessada pela rota produtos.update passada pelo formulário
     public function update($id, Request $request){
         //localiza o produto via id fornecida
         $produto = Produto::find($id);
@@ -101,6 +101,17 @@ class ProdutosController extends Controller
             'referencia' => 'required|min:3',
             'titulo' => 'required|min:3',
         ]);
+
+        //tratamento de envio de imagem (foto) do produto
+        if($request->hasFile('fotoproduto')){
+            //recebe arquivo (requisição para upload do arquivo)
+            $imagem = $request->file('fotoproduto');
+            //nome = hash md5 da id do produto + extensão do arquivo
+            $nomearquivo = md5($id) .".". $imagem->getClientOriginalExtension();
+            //move a imagem (foto) para a pasta img/produtos/$nomearquivo que estará na pasta public do laravel(public/ img/produtos/$nomearquivo)
+            $request->file('fotoproduto')->move(public_path('./img/produtos/'),
+                $nomearquivo);
+        }
 
         //dados do produto
         $produto->referencia = $request->input('referencia');
