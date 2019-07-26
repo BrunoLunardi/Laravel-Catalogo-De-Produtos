@@ -7,7 +7,7 @@
 
     <h1>Criar um novo produto</h1>
 
-    <!-- Verifica se houve erros de dados no forulário -->
+    <!-- Verifica se houve erros de dados no formulário -->
     <!-- Verificação realizada no ProdutosController->store()->validate -->
     <!-- Pode trocar o nome do campo exibido em resources/lang/pt-br/validation.php atributes[] -->
     <!-- É possível adicionar mensagens de erro customizada em resources/lang/pt-br/validation.php custom[] -->

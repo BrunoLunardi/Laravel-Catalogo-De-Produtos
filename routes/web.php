@@ -15,5 +15,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//rota para produto (acessa o controller ProdutosController -> index())
+//rota para produtos
 Route::resource('produtos', 'ProdutosController');
