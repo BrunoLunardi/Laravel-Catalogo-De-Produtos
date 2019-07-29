@@ -17,3 +17,11 @@ Route::get('/', function () {
 
 //rota para produtos
 Route::resource('produtos', 'ProdutosController');
+
+//rota para pesquisar produtos (rota POST)
+    //rota aponta diretamente para um método do Controller
+    //os método create, edit, show e destroy não são criados
+Route::post('produtos/buscar', 'ProdutosController@buscar');
+
+Route::get('adicionar-produto', 'ProdutosController@create');
+Route::get('produtos/{id}/editar', 'ProdutosController@edit');

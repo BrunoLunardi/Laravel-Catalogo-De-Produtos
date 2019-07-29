@@ -22,9 +22,13 @@ class ProdutosController extends Controller
         echo "</pre>";
         */
         //retorna todos os produtos cadastrados no BD, através da model Produto
-        $produtos = Produto::all();
+        //$produtos = Produto::all();
+        //realiza paginação dos produtos, apresenta 4 produtos por página
+        $produtos = Produto::paginate(4);
         //retorna a view resources/views/produto/index.blade.php e passa o array de todos os produtos cadastrados no bd
-        return view('produto.index', array('produtos' => $produtos));
+        //'busca'=>null serve para inicializar a variavel busca da view resouces/views/produto/index.blade.php
+            //senão dará erro na variável $busca no index.blade.php
+        return view('produto.index', array('produtos' => $produtos, 'busca'=>null));
     }
     //se a url tiver id, então esta função é chamada
     //acessado por http://127.0.0.1:8000/produtos/{$id}
@@ -142,6 +146,29 @@ class ProdutosController extends Controller
         Session::flash('mensagem', 'Produto excluído com sucesso.');
         //redireciona para a página anterior (resources/views/produto/index.blade.php)
         return redirect()->back();
+    }
+
+    //método para buscar produtos
+        //recebe dados do formulário de busca de (resources/views/produto/index.blade.php)
+    //Request é necessário para acessar dados do formulário        
+    public function buscar(Request $request){
+        /*
+        //busca produto pelo titulo ou descrição
+        $produtos =  Produto::where('titulo', 'LIKE',
+            '%'.$request->input('busca').'%')->orwhere('descricao', 'LIKE',
+            '%'.$request->input('busca').'%')->get();
+        */
+
+        //busca produto pelo titulo ou descrição e realiza paginação dos produtos
+        $produtos =  Produto::where('titulo', 'LIKE',
+            '%'.$request->input('busca').'%')->orwhere('descricao', 'LIKE',
+            '%'.$request->input('busca').'%')->paginate(4);        
+
+        //retorna para a view o produto encontrado
+            //resources/views/produto/index.blade.php
+        return view('produto.index', array('produtos'=>$produtos,
+            'busca'=>$request->input('busca')));
+        
     }
 
 }

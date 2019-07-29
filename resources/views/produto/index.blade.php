@@ -6,6 +6,25 @@
 @section('content')
 
     <h1>Produtos</h1>
+
+    <!-- Formulário para pesquisar produtos -->
+    <!-- Acessa a rota criada em web.php - Route::post('produtos/buscar', 'ProdutosController@buscar') -->
+        <!-- Por isso foi passado uma url no open() -->
+    {{Form::open(['url'=>['produtos/buscar']])}}
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="input-group">
+                    {{Form::text('busca', $busca, ['class'=>'form-control', 'required',
+                        'placeholder'=>'Buscar'])}}
+                    <span class="input-group-btn">
+                        {{Form::submit('Buscar', ['class'=>'btn btn-default'])}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    {{Form::close()}}
+
+    <!-- Verifica se o controller ProdutosController enviou uma mensagem, via Session -->
     @if(Session::has('mensagem'))
         <div class="alert alert-success">{{Session::get('mensagem')}}</div>
     @endif
@@ -41,6 +60,9 @@
         </div>
         @endforeach
     </div>
+
+<!-- Navegação dos produtos (paginate()) -->
+{{$produtos->links()}}
 
 @endsection
 <!-- fecha conteúdo de @section('content') -->
