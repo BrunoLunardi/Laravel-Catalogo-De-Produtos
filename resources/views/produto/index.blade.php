@@ -48,15 +48,18 @@
                 </a>
             @endif
             
-            <!-- Formulário com method DELETE -->
-            <!-- Rota para deletar produto -->
-            {{Form::open(['route'=>['produtos.destroy', $produto->id],
-                'method'=>'DELETE'])}}
-                <!-- função url adiciona o domínio ao link -->
-                <a class='btn btn-default'
-                    href="{{url('produtos/'.$produto->id.'/edit')}}">Editar</a>
-                {{Form::submit('Excluir', ['class'=>'btn btn-default'])}}
-            {{Form::close()}}
+            <!-- Verifica se usuário está logado, se sim apresenta os botões editar e excluir -->
+            @if(Auth::check())    
+                <!-- Formulário com method DELETE -->
+                <!-- Rota para deletar produto -->
+                {{Form::open(['route'=>['produtos.destroy', $produto->id],
+                    'method'=>'DELETE'])}}
+                    <!-- função url adiciona o domínio ao link -->
+                    <a class='btn btn-default'
+                        href="{{url('produtos/'.$produto->id.'/edit')}}">Editar</a>
+                    {{Form::submit('Excluir', ['class'=>'btn btn-default'])}}
+                {{Form::close()}}
+            @endif
         </div>
         @endforeach
     </div>
