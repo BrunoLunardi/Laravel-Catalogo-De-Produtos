@@ -131,4 +131,17 @@ class ProdutosController extends Controller
 
     }
 
+    //dados fornecidos via DELETE do formulário (resources/views/produto/index.blade.php)
+    //função será acessada pela rota produtos.destroy passada pelo formulário
+    public function destroy($id){
+        //localiza produto pela id fornecida
+        $produto = Produto::find($id);
+        //deleta o produto localizado
+        $produto->delete();
+        //envia mensagem para o resources/views/produto/index.blade.php
+        Session::flash('mensagem', 'Produto excluído com sucesso.');
+        //redireciona para a página anterior (resources/views/produto/index.blade.php)
+        return redirect()->back();
+    }
+
 }

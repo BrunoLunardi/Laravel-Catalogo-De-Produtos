@@ -6,16 +6,41 @@
 @section('content')
 
     <h1>Produtos</h1>
-    <ul>
+    @if(Session::has('mensagem'))
+        <div class="alert alert-success">{{Session::get('mensagem')}}</div>
+    @endif
+    <div class="row">
         <!-- Lista todos os produtos cadastrados no BD -->
         <!-- Cria um link para acessar um produto, através do id fornecido -->
         @foreach ($produtos as $produto)
-        <li>
-            <a href="http://127.0.0.1:8000/produtos/{{$produto->id}}"
-            >{{ $produto->titulo}}</a>
-        </li>
+        <div class="col-md-3">
+            <h4>{{$produto->titulo}}</h4>
+            @if(file_exists("./img/produtos/" . md5($produto->id) . ".jpg"))
+                <!-- função url adiciona o domínio ao link -->
+                <a class='thumbnail' href="{{url('produtos/'.$produto->id)}}">
+                    <!-- asset ajusta o caminho adicionando domínio e corrigindo níveis de nevagação se necessário --> 
+                    {{Html::image(asset("img/produtos/" . md5($produto->id) . 
+                        ".jpg"))}}
+                </a>
+            @else
+                <!-- função url adiciona o domínio ao link -->
+                <a class='thumbnail' href="{{url('produtos/'.$produto->id) }}">
+                    {{$produto->titulo}}
+                </a>
+            @endif
+            
+            <!-- Formulário com method DELETE -->
+            <!-- Rota para deletar produto -->
+            {{Form::open(['route'=>['produtos.destroy', $produto->id],
+                'method'=>'DELETE'])}}
+                <!-- função url adiciona o domínio ao link -->
+                <a class='btn btn-default'
+                    href="{{url('produtos/'.$produto->id.'/edit')}}">Editar</a>
+                {{Form::submit('Excluir', ['class'=>'btn btn-default'])}}
+            {{Form::close()}}
+        </div>
         @endforeach
-    </ul>
+    </div>
 
 @endsection
 <!-- fecha conteúdo de @section('content') -->
