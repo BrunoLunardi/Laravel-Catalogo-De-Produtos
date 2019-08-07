@@ -34,3 +34,7 @@ composer require "laravelcollective/html":"^5.3.0"
 --Atualizar pacotes:
 
 composer update
+
+--Instalar biblioteca HTTP Guzzle (envio de e-amil pelo laravel):
+
+composer require guzzlehttp/guzzle
