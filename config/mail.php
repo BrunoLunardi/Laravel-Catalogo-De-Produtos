@@ -15,8 +15,9 @@ return [
     |            "sparkpost", "postmark", "log", "array"
     |
     */
-
-    'driver' => env('MAIL_DRIVER', 'smtp'),
+    //'driver' => env('MAIL_DRIVER', 'smtp'),
+    //atera driver de envio de email
+    'driver' => env('MAIL_DRIVER', 'mailgun'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,8 +57,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => null,
+        'name' => null,
     ],
 
     /*
@@ -83,10 +84,10 @@ return [
     | connection. You may also set the "password" value below this one.
     |
     */
-
-    'username' => env('MAIL_USERNAME'),
-
-    'password' => env('MAIL_PASSWORD'),
+    //username do mailgun
+    'username' => env('postmaster@sandboxb1f47a6ab1f54bda917eacf5396c3c12.mailgun.org'),
+    //senha do mailgun
+    'password' => env('94f58fa91b46ad46c84390630d41226d-73ae490d-07ba13c2'),
 
     /*
     |--------------------------------------------------------------------------
