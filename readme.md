@@ -7,6 +7,10 @@ composer create-project laravel/laravel olaMundo
 
 php artisan serve
 
+## Configuração do Banco de Dados:
+
+Arquivos .env (raiz do projeto - usado para teste local) e /config/database.php
+
 ## Criar models laravel com migration:
 
 php artisan make:model NomeDaModel --migration
@@ -14,10 +18,6 @@ php artisan make:model NomeDaModel --migration
 ## Criar um controller
 
 php artisan make:controller NomeDaControlller
-
-## Configuração do Banco de Dados:
-
-Arquivos .env (raiz do projeto - usado para teste local) e /config/database.php
 
 ## Instalação do bootstrap:
 
